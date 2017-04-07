@@ -23,3 +23,28 @@ function chk_username_type($userName){
 function login_password_encode($passWord){
     return md5(md5($passWord));
 }
+
+/**
+ * 获取当前登录用户ID
+ * @return Integer|Boolean 如果登录成功则返回用户ID,否则返回 FALSE
+ */
+function is_login(){
+    $userInfo = session('user_auth');
+    if(empty($user)){
+        return FALSE;
+    }else{
+        return $userInfo['uid'];
+    }
+}
+
+/**
+ * 检查是否是超级管理员
+ * @param Integer $uid 用户ID
+ * @return Boolean TRUE/FALSE
+ */
+function is_administrator($uid = NULL){
+    if(is_null($uid)){
+        $uid = is_login();
+    }
+    return $uid && (intval($uid) === C('USER_ADMINISTRATOR'));
+}

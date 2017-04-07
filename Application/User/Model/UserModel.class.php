@@ -34,12 +34,37 @@ class UserModel extends Model{
         }
         // 获取用户数据
         $userResult = $this->where($map)->find();
-        if($userResult === TRUE){
+        if(!is_null($userResult)){
             // 校验密码
             if(login_password_encode($passWord) === $userResult['password']){
+                // 更新用户登录信息
+                $this->updateLogin($userResult);
                 return TRUE;
             }
         }
         return FALSE;
+    }
+
+    /**
+     * 更新用户登录信息
+     * @param Integer $userInfo 用户信息
+     */
+    protected function updateLogin($userInfo){
+        // 更新用户登录信息
+        $saveData = array(
+            'id'                    =>  $userInfo['uid'],
+            'last_login_time'      =>   time(),
+            'last_login_ip'         =>  get_client_ip(1),
+        );
+        $this->save();
+        // TODO:记录用户登录日志
+
+        // 通过 Session 保存用户状态
+        $curLoginUserInfo = array(
+            'uid'       =>  $userInfo['uid'],
+            'username'  =>  $userInfo['username'],
+            'last_login_time'   =>  $userInfo['last_login_time'],
+        );
+        session('user_auth',$curLoginUserInfo);
     }
 }
