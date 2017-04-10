@@ -38,6 +38,17 @@ function is_login(){
 }
 
 /**
+ * 检查是否为 POST 请求'
+ * @return Boolean 如果为 POST 请求,返回 TRUE,否则返回FALSE
+ */
+function is_post(){
+    if(I('post.')) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/**
  * 检查是否是超级管理员
  * @param Integer $uid 用户ID
  * @return Boolean TRUE/FALSE

@@ -9,7 +9,7 @@ class PublicController extends Controller{
     // 用户登录
     public function login(){
         // TODO:测试数据
-        if(I('post.')){
+        if(IS_POST){
             $userName = I('post.userName');
             $passWord = I('post.passWord');
             // TODO:检测用户名类型,邮箱或手机或用户名

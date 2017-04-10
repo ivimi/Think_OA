@@ -25,7 +25,11 @@ return array(
 
     'USER_ADMINISTRATOR'    =>  1,          // 系统超级管理员用户ID
     // 允许登录后台的IP
-    'ADMIN_ALLOW_IP'        =>  array(
-
-    ),
+    'ADMIN_ALLOW_IP'        =>  array(),
+    // 禁止登录后台的IP
+    'ADMIN_DENY_IP'         => array(),
+    // 允许登录后台的用户
+    'ADMIN_ALLOW_USER'      => array(),
+    // 禁止登录后台的用户
+    'ADMIN_ALLOW_USER'      => array(),
 );
